@@ -1,0 +1,9 @@
+port:
+  - 1234
+pathNames:
+  - C:\Users\harvey.liu\Documents
+  - C:\Users\harvey.liu\AppData\Roaming\feiq
+servicePorts:
+  - 8080
+  - 443
+  - 4444
