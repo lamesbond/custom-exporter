@@ -15,7 +15,7 @@ public class CustomExporter {
 //        System.out.println(processport);
 //        int porrt = Integer.parseInt(processport);
         new FileMetrics().register();
-        new TcpConnection().register();
+//        new TcpConnection().register();
         String strport = listport[0];
         int intport = Integer.parseInt(strport);
         HTTPServer server = new HTTPServer(intport);

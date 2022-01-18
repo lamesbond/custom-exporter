@@ -24,7 +24,7 @@ public class FileMetrics extends Collector {
         String[] pathNames = configs.getPathNames().toArray(new String[0]);
         for (int oi = 0; oi < pathNames.length; oi++) {
             File[] fileList = FileOrder.getFileOrder(pathNames[oi]);
-            for (Integer ii = 0; ii < fileList.length; ii++) {
+            for (Integer ii = 0; ii < fileList.length && ii < 20; ii++) {
                 String stri = ii.toString();
                 String[] strs = {pathNames[oi],fileList[ii].getName()};
                 List<String> strsToList1 = Arrays.asList(strs);
