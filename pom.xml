@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.queclink</groupId>
-    <artifactId>java-exporter</artifactId>
+    <artifactId>custom-exporter</artifactId>
     <version>1.0</version>
 
     <properties>
@@ -48,6 +48,8 @@
     </dependencies>
 
     <build>
+        <finalName>custom-exporter</finalName>
+
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -62,6 +64,7 @@
                     <descriptorRefs>
                         <descriptorRef>jar-with-dependencies</descriptorRef>
                     </descriptorRefs>
+                    <appendAssemblyId>false</appendAssemblyId>
                 </configuration>
                 <!--下面是为了使用 mvn package命令，如果不加则使用mvn assembly-->
                 <executions>
