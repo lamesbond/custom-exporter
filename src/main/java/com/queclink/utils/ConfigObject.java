@@ -1,18 +1,25 @@
-package com.queclink;
+package com.queclink.utils;
 
 import com.fasterxml.jackson.dataformat.yaml.YAMLMapper;
-import org.yaml.snakeyaml.Yaml;
-
+import lombok.*;
+import java.util.List;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Objects;
 
-public class ReadConfig {
+@Setter
+@Getter
+@ToString
+@AllArgsConstructor
+@NoArgsConstructor
+public class ConfigObject {
+    private List<String> port;
+    private List<String> pathNames;
+    private List<String> servicePorts;
 
-    public static ConfigObject getConfigs() {
-        InputStream resource = ReadConfig.class.getClassLoader().getResourceAsStream("config.yaml");
+    public static ConfigObject getConfigObject() {
+        InputStream resource = ConfigObject.class.getClassLoader().getResourceAsStream("config.yaml");
         if(Objects.nonNull(resource)) {
-            Yaml yaml = new Yaml();
             YAMLMapper yamlMapper = new YAMLMapper();
             ConfigObject configs = null;
             try {
@@ -20,10 +27,11 @@ public class ReadConfig {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            //com.liubusi.ConfigObject configs = yaml.loadAs(resource, com.liubusi.ConfigObject.class);
             return configs;
         } else {
             return null;
         }
     }
 }
+
+

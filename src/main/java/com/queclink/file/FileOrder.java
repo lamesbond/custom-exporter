@@ -10,13 +10,12 @@ public class FileOrder {
         File dir = new File(pathName);
         File[] files = dir.listFiles();
         Arrays.sort(files, new Comparator<File>() {
-
             @Override
             public int compare(File f1, File f2) {
                 return f2.compareTo(f1);
             }
-
-        });
+        }
+        );
 
         return files;
     }
