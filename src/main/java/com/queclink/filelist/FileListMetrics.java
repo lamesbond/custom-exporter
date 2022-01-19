@@ -1,4 +1,4 @@
-package com.queclink.file;
+package com.queclink.filelist;
 
 import com.queclink.utils.JudgeSystem;
 import io.prometheus.client.Collector;
@@ -11,7 +11,7 @@ import java.util.List;
 
 import static com.queclink.CustomExporter.pathNames;
 
-public class FileMetrics extends Collector {
+public class FileListMetrics extends Collector {
     public List<MetricFamilySamples> collect() {
         List<MetricFamilySamples> mfsFileMetrics = new ArrayList<MetricFamilySamples>();
 
@@ -32,11 +32,9 @@ public class FileMetrics extends Collector {
         for (int oi = 0; oi < pathNames.length; oi++) {
             File[] fileList = FileOrder.getFileOrder(pathNames[oi]);
             for (Integer ii = 0; ii < fileList.length && ii < 20; ii++) {
-                String stri = ii.toString();
-                String[] strs = {pathNames[oi],fileList[ii].getName()};
-                List<String> strsToList1 = Arrays.asList(strs);
-                Long filesize = FileSize.getFileSize(pathNames[oi]+pathConnection+fileList[ii].getName());
-                labeledGauge.addMetric(strsToList1, filesize);
+                List<String> metricLabels = Arrays.asList(pathNames[oi],fileList[ii].getName());
+                Long metricValue = FileSize.getFileSize(pathNames[oi]+pathConnection+fileList[ii].getName());
+                labeledGauge.addMetric(metricLabels, metricValue);
             }
         }
         mfsFileMetrics.add(labeledGauge);

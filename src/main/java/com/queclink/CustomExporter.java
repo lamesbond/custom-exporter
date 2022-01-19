@@ -1,7 +1,7 @@
 package com.queclink;
 
-import com.queclink.file.FileMetrics;
-import com.queclink.tcpconnection.TcpConnection;
+import com.queclink.filelist.FileListMetrics;
+import com.queclink.tcpconnection.TcpConnectionMetrics;
 import com.queclink.utils.ConfigObject;
 import io.prometheus.client.exporter.HTTPServer;
 
@@ -18,8 +18,8 @@ public class CustomExporter {
         listServicePorts = configObject.getServicePorts().toArray(new String[0]);
         int intPort = Integer.parseInt(listPort[0]);
 
-        new FileMetrics().register();
-        new TcpConnection().register();
+        new FileListMetrics().register();
+        new TcpConnectionMetrics().register();
 
         HTTPServer server = new HTTPServer(intPort);
     }
