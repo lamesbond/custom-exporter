@@ -12,7 +12,7 @@ import static com.queclink.CustomExporter.portConnectionCount_Ports;
 public class Metric extends Collector {
     public List<MetricFamilySamples> collect() {
         List<MetricFamilySamples> mfsPortConnectionCount = new ArrayList<MetricFamilySamples>();
-        GaugeMetricFamily labeledGauge = new GaugeMetricFamily("custom_port_connection_count", "统计端口连接数", Arrays.asList("serviceport"));
+        GaugeMetricFamily labeledGauge = new GaugeMetricFamily("custom_port_connection_count", "统计端口连接数", Arrays.asList("port"));
         for (int i = 0; i < portConnectionCount_Ports.length; i++) {
             long connectionCount = ConnectionCount.getPortConnectionCount(portConnectionCount_Ports[i]);
             labeledGauge.addMetric(Arrays.asList(portConnectionCount_Ports[i]), connectionCount);
