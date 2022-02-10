@@ -15,14 +15,14 @@ public class Metric extends Collector {
     public List<MetricFamilySamples> collect() {
         List<MetricFamilySamples> mfsFileSize = new ArrayList<MetricFamilySamples>();
         String[] fileStrs = {"pathname","filename"};
-        GaugeMetricFamily labeledGauge = new GaugeMetricFamily("custom_file_list", "统计目录下的文件以及大小", Arrays.asList(fileStrs));
+        GaugeMetricFamily labeledGauge = new GaugeMetricFamily("custom_file_size", "统计目录下的文件以及大小", Arrays.asList(fileStrs));
 
-        String directoSryeparator = "";
+        String directorySeparator = "";
         if (JudgeSystem.isLinux()) {
-            directoSryeparator = "//";
+            directorySeparator = "//";
             System.out.println("检测到linux系统");
         } else if (JudgeSystem.isWindows()) {
-            directoSryeparator = "\\";
+            directorySeparator = "\\";
             System.out.println("检测到windows系统");
         } else {
             System.out.println("不是linux，也不是windows系统");
@@ -34,7 +34,7 @@ public class Metric extends Collector {
             }
             for (Integer n = 0; n < fileList.length && n < 20; n++) {
                 List<String> metricLabels = Arrays.asList(fileSize_pathNames[m],fileList[n].getName());
-                Long metricValue = FileSize.getFileSize(fileSize_pathNames[m]+directoSryeparator+fileList[n].getName());
+                Long metricValue = FileSize.getFileSize(fileSize_pathNames[m]+directorySeparator+fileList[n].getName());
                 labeledGauge.addMetric(metricLabels, metricValue);
             }
         }
