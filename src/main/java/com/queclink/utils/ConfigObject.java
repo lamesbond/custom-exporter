@@ -14,8 +14,8 @@ import java.util.Objects;
 @NoArgsConstructor
 public class ConfigObject {
     private List<String> port;
-    private List<String> pathNames;
-    private List<String> servicePorts;
+    private List<String> fileSize_pathNames;
+    private List<String> portConnectionCount_Ports;
 
     public static ConfigObject getConfigObject() {
         InputStream resource = ConfigObject.class.getClassLoader().getResourceAsStream("config.yaml");

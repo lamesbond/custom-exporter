@@ -1,4 +1,4 @@
-package com.queclink.tcpconnection;
+package com.queclink.collectors.portConnectionCount;
 
 import com.queclink.utils.JudgeSystem;
 
@@ -7,16 +7,16 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
-public class TcpConnection {
-    public static long getTcpConnectionCount(String servicePort) {
-        long tcpConnection = 0;
+public class ConnectionCount {
+    public static long getPortConnectionCount(String port) {
+        long connectionCount = 0;
         try {
             Runtime runtime = Runtime.getRuntime();
             String[] cmd = null;
             if (JudgeSystem.isLinux()) {
-                cmd = new String[]{"/bin/sh", "-c", "netstat -anp|grep " + servicePort + " | wc -l"};
+                cmd = new String[]{"/bin/sh", "-c", "netstat -anp|grep " + port + " | wc -l"};
             } else if (JudgeSystem.isWindows()) {
-                cmd = new String[]{"cmd", "/C", "netstat -ano|find " + '"' + servicePort + '"' + " /c"};
+                cmd = new String[]{"cmd", "/C", "netstat -ano|find " + '"' + port + '"' + " /c"};
             } else {
                 System.out.println("不是linux，也不是windows系统");
             }
@@ -26,7 +26,7 @@ public class TcpConnection {
             BufferedReader br = new BufferedReader(isr);
             String line = null;
             line = br.readLine();
-            tcpConnection = Long.parseLong(line);
+            connectionCount = Long.parseLong(line);
 
             //直到读完为止
 //            while ((line = br.readLine()) != null) {
@@ -35,7 +35,7 @@ public class TcpConnection {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return tcpConnection;
+        return connectionCount;
     }
 }
 
